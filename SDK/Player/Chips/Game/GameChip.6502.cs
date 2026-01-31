@@ -44,7 +44,7 @@ namespace PixelVision8.Assembly
             ushort combi = (ushort)((hi << 9) | lo);
             return combi;
         }
-            public void Reset()
+        public void Reset()
         {
             A = X = Y = 0;
             SP = 0xFD;
