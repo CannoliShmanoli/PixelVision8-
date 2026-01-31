@@ -30,10 +30,10 @@ namespace PixelVision8.Assembly
 
             PC = address;
         }
-        public void Read(ushort address) {
+        public byte Read(ushort address) {
             return RAM[address];
         }
-        public void Write(ushort address byte val) {
+        public void Write(ushort address, byte val) {
             RAM[address] = val;
         }
         public void ReadWord(ushort address) {
@@ -41,7 +41,7 @@ namespace PixelVision8.Assembly
             byte hi;
             lo = Read(address);
             hi = Read(address+1);
-            ushort combi = (ushort)((hi << 9) | lo);
+            ushort combi = (ushort)((hi << 8) | lo);
             return combi;
         }
         public void Reset()
