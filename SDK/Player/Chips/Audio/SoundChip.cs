@@ -43,7 +43,7 @@ namespace PixelVision8.Player
             get => Channels.Length;
             set
             {
-                value = Utilities.Clamp(value, 1, 5);
+                value = Utilities.Clamp(value, 1, 15);
                 Array.Resize(ref Channels, value);
                 
                 // There should never be an empty sound channel so loop through them and make sure one is created
@@ -195,4 +195,5 @@ namespace PixelVision8.Player
     {
         public SoundChip SoundChip { get; set; }
     }
+
 }
