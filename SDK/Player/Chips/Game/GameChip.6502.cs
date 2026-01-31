@@ -36,7 +36,7 @@ namespace PixelVision8.Assembly
         public void Write(ushort address, byte val) {
             RAM[address] = val;
         }
-        public void ReadWord(ushort address) {
+        public ushort ReadWord(ushort address) {
             byte lo;
             byte hi;
             lo = Read(address);
