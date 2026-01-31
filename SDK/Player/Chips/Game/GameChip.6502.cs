@@ -7,6 +7,49 @@ namespace PixelVision8.Assembly
     /// </summary>
     public partial class GameChip
     {
+        public byte[] RAM = new byte[65536]; // a bit of RAM, i guess. only about 64kb
+
         public bool lockSpecs = false;
-      /// nothing here yet...
+        public byte A; // register A
+        public byte X; // register X
+        public byte Y; // register Y
+        public byte SP;    // stack pointer
+
+        public ushort PC; // program counter
+        public int clockSpeedHz = 1789773; // ntsc nes-ish, but i will make this changeable through chips
+        public int addressBusSize = 16;     // 16-bit address bus
+        public void SetClockSpeed(int hz) {
+            if (lockSpecs)
+                return;
+            
+            clockSpeedHz = hz;
+        }
+        public void SetPC(ushort address) {
+            if (lockSpecs)
+                return;
+
+            PC = address;
+        }
+        public void Read(ushort address) {
+            return RAM[address];
+        }
+        public void Write(ushort address byte val) {
+            RAM[address] = val;
+        }
+        public void ReadWord(ushort address) {
+            byte lo;
+            byte hi;
+            lo = Read(address);
+            hi = Read(address+1);
+            ushort combi = (ushort)((hi << 9) | lo);
+            return combi;
+        }
+            public void Reset()
+        {
+            A = X = Y = 0;
+            SP = 0xFD;
+            PC = ReadWord(0xFFFC);
+        }
+
+    }
 }
